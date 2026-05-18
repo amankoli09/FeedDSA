@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Socio</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="style.css">
+
+</head>
+
+<body>
+  <aside class="sidebar">
+
+    <div class="logo">
+      Socio
+    </div>
+
+    <div class="menu">
+
+      <div class="menu-item active">
+        🏠 Home
+      </div>
+
+      <div class="menu-item">
+        🔍 Explore
+      </div>
+
+      <div class="menu-item">
+        ❤️ Notifications
+      </div>
+
+      <div class="menu-item">
+        👤 Profile
+      </div>
+
+      <div class="menu-item">
+        ⚙ Settings
+      </div>
+
+    </div>
+
+  </aside>
+
+  <main class="main">
+    <div class="top-actions">
+
+      <input type="text" placeholder="Search posts..." class="search-input">
+
+      <button class="sort-btn" onclick="sortPosts()">
+        Sort Likes
+      </button>
+    </div>
+
+    <div class="create-post">
+
+      <div class="profile-circle">
+        A
+      </div>
+
+      <div class="create-right">
+
+        <input type="text" placeholder="What's happening?" class="post-input">
+
+        <div class="create-bottom">
+
+          <div class="post-options">
+            ❤️ Photo
+            📍 Feeling
+          </div>
+
+          <div class="post-buttons">
+
+            <button class="schedule-btn" onclick="schedulePost()">
+              Schedule
+            </button>
+
+            <button class="post-btn" onclick="addPost()">
+              Post
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+    <div class="queue-box">
+
+      <h3>Scheduled Posts</h3>
+
+      <div id="scheduledPosts"></div>
+
+    </div>
+
+    <div id="posts"></div>
+
+    <div id="undoBox"></div>
+
+  </main>
+
+  <aside class="right-panel">
+
+    <div class="profile-card">
+
+      <div class="big-avatar">
+        A
+      </div>
+
+      <h2>Aman Koli</h2>
+
+      <p>@amankoli</p>
+
+    </div>
+
+    <div class="trending">
+
+      <h3>Friend Network</h3>
+
+      <div id="friendNetwork"></div>
+
+    </div>
+
+    <div class="trending">
+
+      <h3>Trending</h3>
+
+      <div class="trend">
+        #coding
+      </div>
+
+      <div class="trend">
+        #socialmedia
+      </div>
+
+      <div class="trend">
+        #design
+      </div>
+
+      <div class="trend">
+        #frontend
+      </div>
+
+    </div>
+
+  </aside>
+
+  <script src="script.js"></script>
+
+</body>
+
+</html>
