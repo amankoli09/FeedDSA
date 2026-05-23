@@ -2,154 +2,139 @@
 <html lang="en">
 
 <head>
-
   <meta charset="UTF-8">
-
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Socio</title>
-
+  <title>Socio — Social Media Feed</title>
+  <meta name="description" content="Socio - A DSA-powered social media feed built with C++ and JavaScript">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body>
+
+  <!-- Left Sidebar -->
   <aside class="sidebar">
+    <div class="logo">Socio</div>
 
-    <div class="logo">
-      Socio
-    </div>
-
-    <div class="menu">
-
-      <div class="menu-item active">
-        🏠 Home
+    <nav class="menu">
+      <div class="menu-item active" id="nav-home">
+        <span class="menu-icon">🏠</span>
+        <span>Home</span>
       </div>
-
-      <div class="menu-item">
-        🔍 Explore
+      <div class="menu-item" id="nav-explore">
+        <span class="menu-icon">🔍</span>
+        <span>Explore</span>
       </div>
-
-      <div class="menu-item">
-        ❤️ Notifications
+      <div class="menu-item" id="nav-notifications">
+        <span class="menu-icon">🔔</span>
+        <span>Notifications</span>
+        <span class="badge">3</span>
       </div>
-
-      <div class="menu-item">
-        👤 Profile
+      <div class="menu-item" id="nav-profile">
+        <span class="menu-icon">👤</span>
+        <span>Profile</span>
       </div>
-
-      <div class="menu-item">
-        ⚙ Settings
+      <div class="menu-item" id="nav-settings">
+        <span class="menu-icon">⚙️</span>
+        <span>Settings</span>
       </div>
+    </nav>
 
-    </div>
-
+    <button class="new-post-btn" onclick="focusPost()">+ New Post</button>
   </aside>
 
+  <!-- Main Feed -->
   <main class="main">
-    <div class="top-actions">
 
-      <input type="text" placeholder="Search posts..." class="search-input">
-
-      <button class="sort-btn" onclick="sortPosts()">
-        Sort Likes
-      </button>
+    <!-- Search Bar -->
+    <div class="search-bar">
+      <span class="search-icon">🔍</span>
+      <input type="text" placeholder="Search posts, people..." class="search-input" id="searchInput">
     </div>
 
+    <!-- Create Post -->
     <div class="create-post">
-
-      <div class="profile-circle">
-        A
-      </div>
-
+      <div class="profile-circle">A</div>
       <div class="create-right">
-
-        <input type="text" placeholder="What's happening?" class="post-input">
-
+        <textarea class="post-input" id="postTextarea" placeholder="What's on your mind?" rows="2"></textarea>
         <div class="create-bottom">
-
           <div class="post-options">
-            ❤️ Photo
-            📍 Feeling
+            <span class="opt-btn">📷 Photo</span>
+            <span class="opt-btn">😊 Feeling</span>
+            <span class="opt-btn" onclick="schedulePost()">🕐 Schedule</span>
           </div>
-
-          <div class="post-buttons">
-
-            <button class="schedule-btn" onclick="schedulePost()">
-              Schedule
-            </button>
-
-            <button class="post-btn" onclick="addPost()">
-              Post
-            </button>
-
-          </div>
-
+          <button class="post-btn" id="postBtn" onclick="addPost()">Post</button>
         </div>
-
       </div>
-
     </div>
-    <div class="queue-box">
 
-      <h3>Scheduled Posts</h3>
-
+    <!-- Scheduled Queue (hidden by default) -->
+    <div class="queue-box" id="queueBox" style="display:none">
+      <div class="queue-header">
+        <span>🕐 Scheduled Posts</span>
+        <span class="queue-count" id="queueCount">0</span>
+      </div>
       <div id="scheduledPosts"></div>
-
     </div>
 
+    <!-- Feed Tabs (replaces Sort Likes button) -->
+    <div class="feed-tabs">
+      <button class="tab active" id="tab-foryou" onclick="switchTab('foryou')">For You</button>
+      <button class="tab" id="tab-popular" onclick="switchTab('popular')">Popular</button>
+      <button class="tab" id="tab-recent" onclick="switchTab('recent')">Recent</button>
+    </div>
+
+    <!-- Posts Feed -->
     <div id="posts"></div>
 
-    <div id="undoBox"></div>
+    <!-- Undo Toast -->
+    <div id="undoBox" class="undo-toast" style="display:none">
+      <span>Post deleted</span>
+      <button onclick="undoDelete()">Undo</button>
+    </div>
 
   </main>
 
+  <!-- Right Panel -->
   <aside class="right-panel">
 
+    <!-- Profile Card -->
     <div class="profile-card">
-
-      <div class="big-avatar">
-        A
+      <div class="big-avatar">A</div>
+      <div class="profile-info">
+        <h2>Aman Koli</h2>
+        <p>@amankoli</p>
       </div>
-
-      <h2>Aman Koli</h2>
-
-      <p>@amankoli</p>
-
+      <div class="profile-stats">
+        <div class="stat"><strong id="postCount">3</strong><span>Posts</span></div>
+        <div class="stat"><strong>283</strong><span>Likes</span></div>
+        <div class="stat"><strong>5</strong><span>Friends</span></div>
+      </div>
     </div>
 
-    <div class="trending">
-
-      <h3>Friend Network</h3>
-
-      <div id="friendNetwork"></div>
-
+    <!-- Friend Network Graph (BFS/DFS visualization) -->
+    <div class="graph-card">
+      <div class="graph-header">
+        <h3>Friend Network</h3>
+        <div class="graph-btns">
+          <button class="graph-btn" id="bfsBtn" onclick="runBFS()">BFS</button>
+          <button class="graph-btn" id="dfsBtn" onclick="runDFS()">DFS</button>
+        </div>
+      </div>
+      <canvas id="networkGraph" width="240" height="190"></canvas>
+      <div class="traversal-result" id="traversalResult">
+        Click BFS or DFS to see traversal
+      </div>
     </div>
 
-    <div class="trending">
-
+    <!-- Trending -->
+    <div class="trending-card">
       <h3>Trending</h3>
-
-      <div class="trend">
-        #coding
-      </div>
-
-      <div class="trend">
-        #socialmedia
-      </div>
-
-      <div class="trend">
-        #design
-      </div>
-
-      <div class="trend">
-        #frontend
-      </div>
-
+      <div class="trend-item">#dsaproject <span>2.1k posts</span></div>
+      <div class="trend-item">#coding <span>1.2k posts</span></div>
+      <div class="trend-item">#socialmedia <span>892 posts</span></div>
+      <div class="trend-item">#frontend <span>321 posts</span></div>
     </div>
 
   </aside>
@@ -157,5 +142,4 @@
   <script src="script.js"></script>
 
 </body>
-
 </html>

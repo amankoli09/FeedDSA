@@ -52,7 +52,8 @@ int main() {
 
     inorder(root);
 
-    // This is for graph
+    // This is for graph - build adjacency list first, then traverse
+    buildGraph();
 
     showConnections();
 

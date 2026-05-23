@@ -67,14 +67,3 @@ void likePost(int id){
     }
     cout << "Post not found!" << endl;
 }
-
-int main() {
-    addPost(1, "Alice", "Hello, this is my first post!");   
-    addPost(2, "Bob", "Good morning everyone!");
-
-    likePost(1);
-    displayPosts();
-    deletePost(2);
-    displayPosts();
-    return 0;
-}
