@@ -37,7 +37,7 @@ void showConnections() {
     }
 }
 
-// BFS - Breadth First Search (Level by Level)
+// BFS - Breadth First Search 
 // Time Complexity: O(V + E)
 void BFS(int start = 0) {
     bool visited[USERS] = {false};
@@ -75,7 +75,7 @@ void DFSHelper(int node, bool visited[]) {
     }
 }
 
-// DFS - Depth First Search (Explore deep connections)
+// DFS - Depth First Search 
 // Time Complexity: O(V + E)
 void DFS(int start = 0) {
     bool visited[USERS] = {false};
