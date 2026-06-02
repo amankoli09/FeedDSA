@@ -5,6 +5,7 @@
 #include "searching.cpp"
 #include "bst.cpp"
 #include "graph.cpp"
+#include "linked_list_comments.cpp"
 
 int main() {
 
@@ -17,16 +18,24 @@ int main() {
     saveDeletedPost("Deleted Post");
     undoDelete();
 
-    // This is for queue scheduling
-    schedulePost("Post At 10 PM");
+    // This is for queue scheduling (Higher number = higher priority)
+    schedulePost(1, "Post At 10 PM (Normal)");
+    schedulePost(10, "Emergency Alert (High Priority)");
+    schedulePost(5, "VIP User Post (Medium Priority)");
     showQueue();
 
     // This is for sorting
     vector<int> likes = {50, 20, 90, 10};
 
     sortLikes(likes);
-
     bubbleSort(likes);
+    insertionSort(likes);
+    quickSort(likes);
+
+    // This is for Linked List (Comments)
+    addComment("Great post!");
+    addComment("I am learning DSA too.");
+    displayComments();
 
     // This is for searching
 

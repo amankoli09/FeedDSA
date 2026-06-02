@@ -3,25 +3,29 @@
 
 using namespace std;
 
-queue<string> postQueue;
+// Using priority_queue with a pair: <priority_level, post_content>
+// Higher priority number = higher priority (processed first)
+priority_queue<pair<int, string>> postQueue;
 
-void schedulePost(string post) {
+void schedulePost(int priority, string post) {
 
-    postQueue.push(post);
+    postQueue.push({priority, post});
 
-    cout << "Post Scheduled\n";
+    cout << "Post Scheduled with priority " << priority << "\n";
 
 }
 
 void showQueue() {
 
-    queue<string> temp = postQueue;
+    // Create a copy to show without modifying the original queue
+    priority_queue<pair<int, string>> temp = postQueue;
 
-    cout << "\nScheduled Posts:\n";
+    cout << "\nScheduled Posts (Highest Priority First):\n";
 
     while(!temp.empty()) {
-
-        cout << temp.front() << endl;
+        
+        // .top() gives the highest priority element
+        cout << "[Priority: " << temp.top().first << "] " << temp.top().second << endl;
 
         temp.pop();
 
