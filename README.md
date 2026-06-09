@@ -304,3 +304,5 @@ This project showcases how selecting the correct data structure improves algorit
 - **Search Efficiency**: Moving from O(N) Linear Search to O(log N) Binary Search reduces search time drastically as post volumes scale.
 - **Hierarchical Access**: BST index allows post ID categorization without sorting the flat feed structure continuously.
 - **Graph Traversal**: Social media network properties (like degrees of separations and friend suggestions) are naturally modeled using Adjacency Lists, providing an optimal time complexity of $O(V + E)$.
+
+## Made with ❤️ 
